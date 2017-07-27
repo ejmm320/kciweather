@@ -1,0 +1,3 @@
+class WeatherData < ApplicationRecord
+  
+end
