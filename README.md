@@ -4,31 +4,36 @@ I really enjoy doing this app, the concept is really simple, the main goal is ge
 
 Platform used for development:
 
-* Ruby version: 
-rails v5.1.2 - ruby 2.4 
+Ruby version: 
+
+* rails v5.1.2 - ruby 2.4 
   
-* System dependencies
-- postgresql v9.4 or higher
-- 
+System dependencies
 
-* Configuration
+* postgresql v9.4 or higher 
 
-* Database creation: 
+Configuration
+
+Database creation: 
+
 ```ruby
 rails db:create && rails db:migrate
 ```
 
-* Database initialization
+Database initialization
+
 Not needed, because all info comes from the API.
 
-* How to run the test suite: 
+How to run the test suite: 
+
 ```ruby
 rspec
 ```
 
-* Services (job queues, cache servers, search engines, etc.)
-[Open Weather Map API](http://openweathermap.org/API#weather)
+Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+* [Open Weather Map API](http://openweathermap.org/API#weather)
 
-* ...
+Deployment instructions
+
+...
