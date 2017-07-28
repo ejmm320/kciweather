@@ -37,6 +37,7 @@ gem 'redis', '~> 3.0'
 
 gem 'faker'
 gem 'httparty'
+gem 'simple_form'
 #gem 'city-state'
 
 group :development, :test do

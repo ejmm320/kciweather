@@ -1,0 +1,14 @@
+<div>
+  <table>
+    <% if @weather.city.present? %>
+    <tr><td colspan="2">The current weather of <%=@weather.city%> is:</td></tr>
+    <% else %>
+    <tr><td colspan="2">Someplace in the world has this weather:</td></tr>
+    <% end %>
+    <tr><td><%= image_tag "http://openweathermap.org/img/w/#{@result[:icon]}.png" %></td><td>Temp avg: <%= @result[:tmp]%></td></tr>
+    <tr><td>Longitude: <%= @result[:lon]%></td><td>Latitude: <%= @result[:lat]%></td></tr>
+    <tr><td>Weather: <%= @result[:weather]%></td><td>Description: <%= @result[:desc]%></td></tr>
+    <tr><td>Temp min: <%= @result[:tmp_min]%></td><td>Temp max: <%= @result[:tmp_max]%></td></tr>
+    <tr><td colspan="2"><%= @result[:message]%></td></tr>
+  </table>
+</div>
