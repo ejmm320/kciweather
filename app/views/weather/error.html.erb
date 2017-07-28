@@ -1,1 +1,3 @@
-<%= @result[:message]%>
+<%= render 'form'%>
+<br>
+<p class="alert alert-danger"><%= @result[:message].to_s.capitalize%></p>

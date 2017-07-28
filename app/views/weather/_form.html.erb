@@ -1,6 +1,6 @@
 <%= simple_form_for @weather do |f|%>
 <%= f.input :country %>
 <%= f.input :city %>
-<%= f.submit 'Get Weather'%>
-<%= f.submit 'Get Random Weather'%>
+<%= f.submit 'Get Weather', class: 'btn btn-primary', id: 'wplace_btn'%>
+<%= f.submit 'Get Random Weather', class: 'btn btn-warning', id: 'wrandom_btn'%>
 <% end %>

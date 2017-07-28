@@ -11,9 +11,9 @@ class Weather
     @city = params[:city]
     @country = params[:country]
     if @city.blank? and @country.blank?      
-      @q = "lat=#{@lat}&lon=#{@lon}"
+      @q = "lat=#{@lat}&lon=#{@lon}&units=metric"
     else
-      @q = "q=#{@city},#{@country}"
+      @q = "q=#{@city},#{@country}&units=metric"
     end
   end
 
