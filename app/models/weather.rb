@@ -19,6 +19,7 @@ class Weather
 
   # Here it should go first to check in Cache if the weather_data exists
   # if not then goes to the API to get new info and save it.
+  # Expires cache each 15 minutes in order to get new info from API
   def get_weather_data
     weather_data = {}
     if @city.present?
@@ -26,6 +27,7 @@ class Weather
       if cache_weather.nil?
         weather_data = get_weather_data_from_api
         $redis.set(@city, weather_data.to_json)
+        $redis.expire(@city, 15.minutes.to_i)
       else
         weather_data = JSON.parse(cache_weather)
       end
