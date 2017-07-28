@@ -7,7 +7,7 @@ class WeatherController < ApplicationController
 
   def create
     @weather = Weather.new(weather_params)
-    @result = @weather.get_weather_data 
+    @result = ActiveSupport::HashWithIndifferentAccess.new(@weather.get_weather_data) 
     unless @result[:works]
       render 'error'
     end

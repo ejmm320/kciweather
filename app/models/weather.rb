@@ -19,15 +19,31 @@ class Weather
 
   # Here it should go first to check in Cache if the weather_data exists
   # if not then goes to the API to get new info and save it.
-  # API returns HTTP code as well as a Message to let the client knows about results
   def get_weather_data
+    weather_data = {}
+    if @city.present?
+      cache_weather = $redis.get(@city)
+      if cache_weather.nil?
+        weather_data = get_weather_data_from_api
+        $redis.set(@city, weather_data.to_json)
+      else
+        weather_data = JSON.parse(cache_weather)
+      end
+    else
+      weather_data = get_weather_data_from_api
+    end
+    weather_data
+  end
+
+  # API returns HTTP code as well as a Message to let the client knows about results
+  def get_weather_data_from_api
     response = HTTParty.get(query_url)
     if response.code.eql?(500)
       { works: false, message: "Oops There is something wrong!!"}
     else
       obj = WeatherData.new(payload: JSON.parse(response.body))
       if obj.payload["cod"].to_i.eql?(200)
-        obj.save
+        #obj.save
         set_response(obj)  
       else
         { works: false, message: obj.payload["message"]}
