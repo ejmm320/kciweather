@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20170727211403) do
 
   create_table "weather_data", force: :cascade do |t|
     t.jsonb "payload", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["payload"], name: "index_weather_data_on_payload", using: :gin
   end
 

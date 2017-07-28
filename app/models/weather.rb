@@ -17,7 +17,7 @@ class Weather
     end
   end
 
-  # Here it should go first to check in Database if the weather_data exists
+  # Here it should go first to check in Cache if the weather_data exists
   # if not then goes to the API to get new info and save it.
   # API returns HTTP code as well as a Message to let the client knows about results
   def get_weather_data
@@ -27,18 +27,8 @@ class Weather
     else
       obj = WeatherData.new(payload: JSON.parse(response.body))
       if obj.payload["cod"].to_i.eql?(200)
-        # obj.save
-        { works: true,
-          lon: obj.payload["coord"]["lon"],
-          lat: obj.payload["coord"]["lat"],
-          weather: obj.payload["weather"][0]["main"],
-          desc: obj.payload["weather"][0]["description"], 
-          icon: obj.payload["weather"][0]["icon"], 
-          tmp: obj.payload["main"]["temp"], 
-          tmp_min: obj.payload["main"]["temp_min"], 
-          tmp_max: obj.payload["main"]["temp_max"],
-          message: "How cool is this?" 
-        }
+        obj.save
+        set_response(obj)  
       else
         { works: false, message: obj.payload["message"]}
       end 
@@ -49,6 +39,20 @@ class Weather
 
   def query_url
     "#{ENV['OWAPIURL']}?APPID=#{ENV['OWAPIKEY']}&#{q}"
+  end
+
+  def set_response(obj)
+    { works: true,
+      lon: obj.payload["coord"]["lon"],
+      lat: obj.payload["coord"]["lat"],
+      weather: obj.payload["weather"][0]["main"],
+      desc: obj.payload["weather"][0]["description"], 
+      icon: obj.payload["weather"][0]["icon"], 
+      tmp: obj.payload["main"]["temp"], 
+      tmp_min: obj.payload["main"]["temp_min"], 
+      tmp_max: obj.payload["main"]["temp_max"],
+      message: "How cool is this?" 
+    }
   end
 
 end
