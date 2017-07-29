@@ -2,7 +2,7 @@
 
 I really enjoy doing this app, the concept is really simple, the main goal is getting from OpenWeather API the weather from any city of the world or from some random geographic coordinates.
 
-Platform used for development:
+Platform details:
 
 ## Ruby version
 
@@ -11,13 +11,27 @@ Platform used for development:
 ## System dependencies
 
 * postgresql v9.4 or higher
-* redis-server 
+* redis-server
+* docker
+* docker-compose 
 
-## Database creation
+## In order to get the project running
 
-```ruby
-rails db:create && rails db:migrate
+Clone the project into your machine and then execute:
+
+```bash
+$ docker-compose up --build
 ```
+
+Open another console and run:
+
+* For linux users:
+
+```bash
+$ docker-compose exec --user "$(id -u):$(id -g)" website rails db:reset
+$ docker-compose exec --user "$(id -u):$(id -g)" website rails db:migrate
+```
+If not using linux remove the --user flag.
 
 ## Database initialization
 
