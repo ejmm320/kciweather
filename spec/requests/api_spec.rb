@@ -6,31 +6,34 @@ describe 'KCIWeather Spec' do
   # works : true if found city, false otherwise
   # weather: contains an array weather like the payload of the OpenWeather API
   
-  describe 'GET weather info with random geographic coordinates' do
-    it 'should return the weather using a fake latitude and longitude' do
-      x = Weather.new(city: '', country: '').get_weather_data
-      expect(x).to be_a Hash
-      expect(x[:works]).to be true
-      expect(x[:weather]).not_to be_empty
-    end
-  end
-  
-  describe 'GET weather info given the City and Country' do 
-    context 'with invalid params' do
-      it 'should be a Hash with a key named :works and be false' do
-        x = Weather.new(city: "XXXXX", country: "22").get_weather_data
-        expect(x).to be_a Hash
-        expect(x[:works]).to be false
+  describe 'GET weather info from OpenWeather API' do
+    let(:random_weather){ Weather.new }
+    let(:city_weather){ Weather.new(city: 'Barinas', country: 've') }
+    let(:wrong_city) { Weather.new(city: 'XXXXXXX', country: '22') }
+
+    context 'with valid params' do
+      it 'should return the weather using a random latitude and longitude' do
+        response = HTTParty.get(random_weather.query_url)
+        expect(response.code).to be 200
+        expect(JSON.parse(response.body)).not_to be_empty
+      end
+
+      it 'should return the weather from a given city and country' do
+        response = HTTParty.get(city_weather.query_url)
+        expect(response.code).to be 200
+        expect(JSON.parse(response.body)['name']).to eq("Barinas")
       end
     end
 
-    context 'with valid params' do
-      it 'should have the weather data of the city' do
-        x = Weather.new(city: "San Cristobal", country: "ve").get_weather_data
-        expect(x).to be_a Hash
-        expect(x[:works]).to be true
-        expect(x[:weather]).not_to be_empty
+    context 'with invalid params' do
+      it 'should return an error with a wrong city info' do
+        response = HTTParty.get(wrong_city.query_url)
+        expect(response.code).to be 404
+        expect(JSON.parse(response.body)['cod']).to eq("404")
       end
     end
+
+
   end
+  
 end

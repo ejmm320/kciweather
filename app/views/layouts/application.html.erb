@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kciweather</title>
     <%= csrf_meta_tags %>
 
@@ -10,16 +12,17 @@
 
   <body>
     <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card">
-              <h3 class="card-header">
-                  KCIWeather Simple app
-              </h3>
-              <div class="card-block">
-                <%= yield %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card">
+                <h3 class="card-header">
+                  KCIWeather
+                </h3>
+                <div class="card-block">
+                  <%= yield %>
+                </div>
               </div>
             </div>
           </div>

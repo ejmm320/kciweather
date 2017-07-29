@@ -53,11 +53,11 @@ class Weather
     end
   end
 
-  private
-
   def query_url
     "#{ENV['OWAPIURL']}?APPID=#{ENV['OWAPIKEY']}&#{q}"
   end
+
+  private
 
   def set_response(obj)
     { works: true,
