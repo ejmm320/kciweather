@@ -39,14 +39,20 @@ Not needed, because all info comes from the API and get stored in redis server w
 
 ## How to run the test suite
 
-```ruby
-rspec
+```bash
+$ docker-compose run --user "$(id -u):$(id -g)" website rspec
 ```
 
 ## Services (job queues, cache servers, search engines, etc.)
 
 * [Open Weather Map API](http://openweathermap.org/API#weather)
 
-## Deployment instructions
+## Notes 
 
-...
+* If there is a problem running the project / test suite:
+
+```bash
+$ docker-compose run --user "$(id -u):$(id -g)" website rake tmp:cache:clear
+```
+
+* If you are not using docker please work with the master branch
